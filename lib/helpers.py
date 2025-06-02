@@ -64,8 +64,29 @@ def delete_product(product_id):
     session.commit()
     
 # CRUD Operations for Supplier
-'''def create_supplier(name, contact_info=""):
+def create_supplier(name, contact_info=""):
     supplier = Supplier(name=name, contact_info=contact_info)
     session.add(supplier)
     session.commit()
-    return supplier''''''
+    return supplier
+
+def get_all_suppliers():
+    return session.query(Supplier).all()
+
+def get_supplier_by_id(supplier_id):
+    return session.querry(Supplier).get(supplier_id)
+
+def update_supplier(supplier_id, new_name=None, new_contact_info=None):
+    supplier = session.query(Supplier).get(supplier_id)
+    if new_name:
+        supplier.name = new_name
+    if new_contact_info:
+        supplier.contact_info = new_contact_info
+    session.commit()
+    return supplier
+
+def delete_product(supplier_id):
+    supplier = session.query(Supplier).get(supplier_id)
+    session.delete(supplier)
+    session.commit()
+    
