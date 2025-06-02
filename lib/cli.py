@@ -144,7 +144,58 @@ def Product_menu():
             break
         else:
             print("Invalid option. Please try again.")
+
 # Function to handle stock transactions
+def transaction_menu():
+    while True:
+        print("\n=== STOCK TRANSACTION MANAGEMENT ===")
+        print("1. Add Stock Transaction")
+        print("2. View Transactions by Product")
+        print("3. View All Transactions")
+        print("4. Delete Transaction")
+        print("5. Back to Main Menu")
+        choice = input("Select an option (1-5): ")
+
+        if choice == '1':
+            product_id = int(input("Enter product ID: "))
+            change_in_quantity = int(input("Enter change in quantity: "))
+            transaction_type = input("Enter transaction type (purchase/sale/adjustment): ")
+            create_stock_transaction(product_id, change_in_quantity, transaction_type)
+            print("Stock transaction added successfully.")
+
+        elif choice == '2':
+            product_id = int(input("Enter product ID to view transactions: "))
+            transactions = get_transactions_by_product(product_id)
+            if transactions:
+                for transaction in transactions:
+                    print(transaction)
+            else:
+                print("No transactions found for this product.")
+
+        elif choice == '3':
+            transactions = get_all_stock_transactions()
+            if transactions:
+                for transaction in transactions:
+                    print(transaction)
+            else:
+                print("No stock transactions found.")
+
+        elif choice == '4':
+            transaction_id = int(input("Enter transaction ID to delete: "))
+            try:
+                delete_stock_transaction(transaction_id)
+                print("Transaction deleted successfully.")
+            except ValueError as e:
+                print(e)
+
+        elif choice == '5':
+            break
+        else:
+            print("Invalid option. Please try again.")
+
+# Main function to run the CLI
+
+
         
             
 
