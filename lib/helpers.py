@@ -32,3 +32,40 @@ def delete_category(category_id):
     session.delete(category)
     session.commit()
    
+# CRUD Operations for Product
+def create_product(name, description, price, category_id, supplier_id, quantity=0):
+    product = Product(name=name,
+                      description=description, 
+                      price=price,
+                      category_id=category_id, 
+                      supplier_id=supplier_id,
+                      quantity_in_stock=quantity)
+    session.add(product)
+    session.commit()
+    return product
+
+def get_all_products():
+    return session.query(Product).all()
+
+def get_product_by_id(product_id):
+    return session.query(Product).get(product_id)
+
+def update_product(product_id, **kwargs):
+    product = session.query(Product).get(product_id)
+    for key, value in kwargs.items():
+        if hasattr(product, key):
+            setattr(product, key, value)
+    session.commit()
+    return product
+
+def delete_product(product_id):
+    product = session.query(Product).get(product_id)
+    session.delete(product)
+    session.commit()
+    
+# CRUD Operations for Supplier
+'''def create_supplier(name, contact_info=""):
+    supplier = Supplier(name=name, contact_info=contact_info)
+    session.add(supplier)
+    session.commit()
+    return supplier''''''
