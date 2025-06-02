@@ -12,7 +12,9 @@ class StockTransaction(Base):
     transaction_type = Column(String, nullable=False)  # 'purchase', 'sale', 'adjustment'
     timestamp = Column(DateTime, default=datetime.utcnow)
 
+    # Relationships
     product = relationship("Product", back_populates="stock_transactions")
+    
     def __repr__(self):
         return (f"<StockTransaction(id={self.id}, product_id={self.product_id}, "
                 f"change_in_quantity={self.change_in_quantity}')>")

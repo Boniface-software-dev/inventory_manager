@@ -12,11 +12,13 @@ class Product(Base):
     quantity_in_stock = Column(Integer, default=0)
     category_id = Column(Integer, ForeignKey('categories.id'))
     supplier_id = Column(Integer, ForeignKey('suppliers.id'))
+                         
+    #relationships
 
     category = relationship("Category", back_populates="products")
     supplier = relationship("Supplier", back_populates="products")
+
+    #representation method for debugging and logging
     def __repr__(self):
         return f"<Product(id={self.id}, name='{self.name}', price={self.price}, quantity_in_stock={self.quantity_in_stock})>"
-    def __str__(self):
-        return f"Product: {self.name}, Price: {self.price}, Stock: {self.quantity_in_stock}, Category: {self.category.name if self.category else 'N/A'}, Supplier: {self.supplier.name if self.supplier else 'N/A'}"
     

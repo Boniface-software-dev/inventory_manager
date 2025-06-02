@@ -8,6 +8,8 @@ class Category(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     description = Column(String)
+    
+    # Relationships
 
     products = relationship("Products", back_populates="category")
     def __repr__(self):
