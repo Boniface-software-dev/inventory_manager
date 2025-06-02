@@ -51,3 +51,42 @@ def category_menu():
             print("Invalid option. Please try again.")
 
 # Function to handle supplier management
+def supplier_menu():
+    while True:
+        print("\n--- SUPPLIER MANAGEMENT ---")
+        print("1. List all suppliers")
+        print("2. Add new supplier")
+        print("3. Update supplier")
+        print("4. Delete supplier")
+        print("5. Back to main menu")
+        choice = input("Select an option (1-5): ")
+
+        if choice == '1':
+            suppliers = get_all_suppliers()
+            display_suppliers(suppliers)
+
+        elif choice == '2':
+            name = input("Supplier name: ")
+            contact = input("Contact info (optional): ")
+            create_supplier(name, contact)
+            print(f"Supplier '{name}' created!")
+
+        elif choice == '3':
+            sup_id = int(input("Supplier ID to update: "))
+            new_name = input("New name (leave blank to keep): ")
+            new_contact = input("New contact info (leave blank to keep)")
+            update_supplier(sup_id, new_name or None, new_contact or None)
+            print(f"{new_name}, updated succesfully!")
+
+        elif choice == '4':
+            sup_id = int(input("Supplier ID to delete: "))
+            delete_supplier(sup-id)
+            print("Supplier deleted!")
+
+        elif choice == '5':
+            break
+        else:
+            print("Invalid choice")
+
+
+
