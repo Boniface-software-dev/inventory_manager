@@ -136,3 +136,27 @@ def delete_stock_transaction(transaction_id):
     else:
         raise ValueError("Transaction not found.")
     return transaction
+
+#Display Helpers
+def display_categories(categories):
+    print("\nCategories:")
+    for cat in categories:
+        print(f"{cat.id}: {cat.name} - {cat.description or 'No description'}")
+
+def display_products(products):
+    print("\nProducts:")
+    for prod in products:
+        cat_name = prod.category.name if prod.category else "No Category"
+        sup_name = prod.supplier.name if prod.supplier else "No Supplier"
+        print(f"{prod.id}: {prod.name} - ${prod.price:.2f}, Stock: {prod.quantity_in_stock}")
+        print(f"Category: {cat_name}, Supplier: {sup_name}")
+
+def display_suppliers(suppliers):
+    print("\nSuppliers:")
+    for sup in suppliers:
+        print(f"{sup.id}: {sup.name} - {sup.contact_info or 'No contact info'}")
+
+def display_transactions(transactions):
+    print("\nStock Transactions:")
+    for trans in transactions:
+        print(f"{trans.timestamp}: Product {trans.product_id} - {trans.chang_in_qantity} units ({trans.transaction_type}) ")
