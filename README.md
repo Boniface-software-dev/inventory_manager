@@ -82,7 +82,7 @@ pipenv run alembic upgrade head
 rm inventory.db
 
 ## Database Schema
-
+```bash
 erDiagram
     CATEGORY ||--o{ PRODUCT : contains
     SUPPLIER ||--o{ PRODUCT : supplies
@@ -114,7 +114,7 @@ erDiagram
         datetime timestamp
     }
 
-
+```
 
 
 ## Support
