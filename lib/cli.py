@@ -194,7 +194,27 @@ def transaction_menu():
             print("Invalid option. Please try again.")
 
 # Main function to run the CLI
+def main():
 
+    from lib.db import init_db
+    init_db()  # Initialize the database
+    print("Welcome to the Inventory Management System!")
+    while True:
+        choice = main_menu()
+        
+        if choice == '1':
+            category_menu()
+        elif choice == '2':
+            supplier_menu()
+        elif choice == '3':
+            Product_menu()
+        elif choice == '4':
+            transaction_menu()
+        elif choice == '5':
+            print("Exiting the Inventory Management System. Goodbye!")
+            break
+        else:
+            print("Invalid option. Please try again.")
 
         
             
