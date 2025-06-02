@@ -86,7 +86,67 @@ def supplier_menu():
         elif choice == '5':
             break
         else:
-            print("Invalid choice")
+            print("Invalid option. Please try again.")
+
+#Product menu fuctions
+def Product_menu():
+    while True:
+        print("\n --- PRODUCT MANAGEMENT ---")
+        print("1. List all products")
+        print("2. Add new product")
+        print("3. Update product")
+        print("4. Delete product")
+        print("5. Back to main menu")
+        choice = input("Select an option (1-5): ")
+
+        if choice == '1':
+            products = get_all_products()
+            display_products(products)
+        
+        elif choice == '2':
+            name = input("Product name: ")
+            price = float(input("Price: "))
+            quantity = int(input("Initial quantity: "))
+            cat_id = int(input("Category ID: "))
+            sup_id = int(input("Supplier ID: "))
+            desc = input("Description (optional): ")
+            
+            create_product(name, price, cat_id, sup_id, desc, quantity)
+            print(f"Product '{name}' created!")
+
+        elif choice == '3':
+            prod_id = int(input("Product ID to update: "))
+            print("Leave fields blank to keep current values")
+            
+            updates = {}
+            if name := input("New name: "):
+                updates['name'] = name
+            if price := input("New price: "):
+                updates['price'] = float(price)
+            if quantity := input("New quantity: "):
+                updates['quantity_in_stock'] = int(quantity)
+            if cat_id := input("New category ID: "):
+                updates['category_id'] = int(cat_id)
+            if sup_id := input("New supplier ID: "):
+                updates['supplier_id'] = int(sup_id)
+            if desc := input("New description: "):
+                updates['description'] = desc
+                
+            update_product(prod_id, **updates)
+            print("Product updated!")
+        
+        elif choice == '4':
+            prod_id = int(input("Product ID to delete: "))
+            delete_product(prod_id)
+            print("Product deleted!")
+
+        elif choice == '5':
+            break
+        else:
+            print("Invalid option. Please try again.")
+# Function to handle stock transactions
+        
+            
 
 
 
