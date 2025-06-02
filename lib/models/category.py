@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
 from lib.models import Base
 
 class Category(Base):
@@ -8,4 +9,6 @@ class Category(Base):
     name = Column(String, nullable=False)
     description = Column(String)
 
-
+    products = relationship("Products", back_populates="category")
+    def __repr__(self):
+        return f"<Category(id={self.id}, name='{self.name}', description='{self.description}')>"
