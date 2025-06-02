@@ -85,8 +85,54 @@ def update_supplier(supplier_id, new_name=None, new_contact_info=None):
     session.commit()
     return supplier
 
-def delete_product(supplier_id):
+def delete_supplier(supplier_id):
     supplier = session.query(Supplier).get(supplier_id)
     session.delete(supplier)
     session.commit()
+
+# CRUD Operations for StockTransaction
+def create_stock_transaction(product_id, change_in_quantity, transaction_type):
+    #update product stock
+    product = session.query(Product).get(product_id)
+    if transaction_type == 'purchase':
+        product.quantity_in_stock += change_in_quantity
+    elif transaction_type == 'sale':
+        product.quantity_in_stock -= change_in_quantity
+    elif transaction_type == 'adjustment':
+        product.quantity_in_stock += change_in_quantity 
+    else:
+        raise ValueError("Invalid transaction type. Must be 'purchase', 'sale', or 'adjustment'.")
     
+    # Create the stock transaction record
+    transaction = StockTransaction(
+        product_id=product_id,
+        change_in_quantity=change_in_quantity,
+        transaction_type=transaction_type
+    )
+    session.add(transaction)
+    session.commit()
+    return transaction
+
+def get_transactions_by_product(product_id):
+    return session.query(StockTransaction).filter_by(product_id=product_id).all()
+
+def get_all_stock_transactions():
+    return session.query(StockTransaction).all()
+
+def delete_stock_transaction(transaction_id):
+    transaction = session.query(StockTransaction).get(transaction_id)
+    if transaction:
+        # Adjust the product stock before deleting the transaction
+        product = session.query(Product).get(transaction.product_id)
+        if transaction.transaction_type == 'purchase':
+            product.quantity_in_stock -= transaction.change_in_quantity
+        elif transaction.transaction_type == 'sale':
+            product.quantity_in_stock += transaction.change_in_quantity
+        elif transaction.transaction_type == 'adjustment':
+            product.quantity_in_stock -= transaction.change_in_quantity
+        
+        session.delete(transaction)
+        session.commit()
+    else:
+        raise ValueError("Transaction not found.")
+    return transaction
