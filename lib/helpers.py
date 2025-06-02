@@ -1,7 +1,7 @@
-from lib.db import session
+from lib.models.db import session
 from lib.models.category import Category
-from lib.models.product import Product
 from lib.models.supplier import Supplier
+from lib.models.product import Product
 from lib.models.stock_transaction import StockTransaction
 
 # CRUD Operations

@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-from lib.db import Base
+from lib.models.db import Base
 
 class Supplier(Base):
     __tablename__ = 'suppliers'

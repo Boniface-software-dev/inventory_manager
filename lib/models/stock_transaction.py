@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from lib.db import Base
+from lib.models.db import Base
 
 class StockTransaction(Base):
     __tablename__ = 'stock_transactions'

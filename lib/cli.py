@@ -196,7 +196,7 @@ def transaction_menu():
 # Main function to run the CLI
 def main():
 
-    from lib.db import init_db
+    from lib.models.db import init_db
     init_db()  # Initialize the database
     print("Welcome to the Inventory Management System!")
     while True:

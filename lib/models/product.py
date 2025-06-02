@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
-from lib.db import Base
+from lib.models.db import Base
 
 class Product(Base):
     __tablename__ = 'products'
@@ -17,6 +17,7 @@ class Product(Base):
 
     category = relationship("Category", back_populates="products")
     supplier = relationship("Supplier", back_populates="products")
+    stock_transactions = relationship("StockTransaction", back_populates="product")
 
     #representation method for debugging and logging
     def __repr__(self):
